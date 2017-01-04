@@ -4,8 +4,8 @@ import javax.persistence.*;
 import java.time.Duration;
 import java.time.temporal.ChronoUnit;
 
-//@Entity
-//@Table(name = "timings")
+@Entity
+@Table(name = "timings")
 public class Timing {
 
     @Id
@@ -15,8 +15,8 @@ public class Timing {
     private ChronoUnit unit;
     private Duration duration;
 
-    @OneToMany(mappedBy = "")
-    private TimingConfig timingConfig;
+//    @OneToMany(mappedBy = "")
+//    private TimingConfig timingConfig;
 
     public long getId() {
         return id;
@@ -50,11 +50,11 @@ public class Timing {
         this.duration = duration;
     }
 
-    public TimingConfig getTimingConfig() {
-        return timingConfig;
-    }
+//    public TimingConfig getTimingConfig() {
+//        return timingConfig;
+//    }
 
-    public void setTimingConfig(TimingConfig timingConfig) {
-        this.timingConfig = timingConfig;
-    }
+//    public void setTimingConfig(TimingConfig timingConfig) {
+//        this.timingConfig = timingConfig;
+//    }
 }

@@ -1,10 +1,12 @@
 package ru.variousvar.timebalancer.config;
 
+import org.flywaydb.core.Flyway;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.ClassPathResource;
+import org.springframework.core.io.Resource;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseBuilder;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseType;
@@ -26,6 +28,9 @@ public class DatabaseConfiguration  {
 
     @Value("${db.url}")
     private String dbUrl;
+
+    @Value("${classpath:db/migrations}")
+    private Resource migrationsPath;
 
     @Bean
     public DataSource dataSource() throws Exception {
@@ -85,5 +90,15 @@ public class DatabaseConfiguration  {
         entityManagerFactory.setJpaProperties(additionalProperties);
 
         return entityManagerFactory;
+    }
+
+    @Bean
+    public Flyway flyway() throws Exception {
+        Flyway flyway = new Flyway();
+        flyway.setBaselineOnMigrate(true);
+        flyway.setDataSource(dataSource());
+        flyway.setLocations("classpath:" + migrationsPath.getFile().getAbsolutePath());
+
+        return flyway;
     }
 }

@@ -12,13 +12,13 @@ import ru.variousvar.timebalancer.repository.ProfileRepository;
 import java.util.List;
 
 @RestController
-@RequestMapping(path = "/profile")
+@RequestMapping("/profiles")
 public class ProfileController {
 
     @Autowired
     private ProfileRepository profileRepository;
 
-    @GetMapping(path = "")
+    @GetMapping
     public ResponseEntity<List<Profile>> getAll() {
         return new ResponseEntity<>(profileRepository.findAll(), HttpStatus.OK);
     }
