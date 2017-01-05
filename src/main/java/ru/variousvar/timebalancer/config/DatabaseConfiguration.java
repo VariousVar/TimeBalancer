@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.DependsOn;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
@@ -36,34 +37,13 @@ public class DatabaseConfiguration  {
     public DataSource dataSource() throws Exception {
         DriverManagerDataSource dataSource = new DriverManagerDataSource();
 
-        DriverManagerDataSource builder = new DriverManagerDataSource();
-//        dataSource.setDriverClassName(Hsql);
+        dataSource.setDriverClassName("com.mysql.jdbc.Driver");
         dataSource.setUrl(dbUrl);
 
         return dataSource;
     }
 
-    @Bean
-    public DataSourceInitializer dataSourceInitializer() throws Exception {
-        DataSourceInitializer dataSourceInitializer = new DataSourceInitializer();
-
-        dataSourceInitializer.setDataSource(dataSource());
-        dataSourceInitializer.setDatabasePopulator(dbInit());
-
-        return dataSourceInitializer;
-    }
-
-    @Bean
-    public DatabasePopulator dbInit() throws Exception {
-        ResourceDatabasePopulator resourceDatabasePopulator = new ResourceDatabasePopulator();
-
-        resourceDatabasePopulator.addScript(new ClassPathResource("db/init.sql"));
-//        resourceDatabasePopulator.addScript(new ClassPathResource("db/populate.sql"));
-
-        return resourceDatabasePopulator;
-    }
-
-    @Bean
+    @Bean @DependsOn("flyway")
     public LocalContainerEntityManagerFactoryBean entityManagerFactory() throws Exception {
         LocalContainerEntityManagerFactoryBean entityManagerFactory = new LocalContainerEntityManagerFactoryBean();
 
@@ -80,25 +60,25 @@ public class DatabaseConfiguration  {
         Properties additionalProperties = new Properties();
         additionalProperties.put(
                 "hibernate.dialect",
-                "org.hibernate.dialect.HSQLDialect");
+                "org.hibernate.dialect.MySQL5InnoDBDialect");
         additionalProperties.put(
                 "hibernate.show_sql",
                 true);
-        additionalProperties.put(
-                "hibernate.hbm2ddl.auto",
-                "update");
+//        additionalProperties.put(
+//                "hibernate.hbm2ddl.auto",
+//                "update");
         entityManagerFactory.setJpaProperties(additionalProperties);
 
         return entityManagerFactory;
     }
 
-    @Bean
-    public Flyway flyway() throws Exception {
-        Flyway flyway = new Flyway();
-        flyway.setBaselineOnMigrate(true);
-        flyway.setDataSource(dataSource());
-        flyway.setLocations("classpath:" + migrationsPath.getFile().getAbsolutePath());
-
-        return flyway;
-    }
+//    @Bean
+//    public Flyway flyway() throws Exception {
+//        Flyway flyway = new Flyway();
+//        flyway.setBaselineOnMigrate(true);
+//        flyway.setDataSource(dataSource());
+//        flyway.setLocations("classpath:" + migrationsPath.getFile().getAbsolutePath());
+//
+//        return flyway;
+//    }
 }
