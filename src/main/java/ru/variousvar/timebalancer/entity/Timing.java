@@ -15,8 +15,8 @@ public class Timing {
     private ChronoUnit unit;
     private Duration duration;
 
-//    @OneToMany(mappedBy = "")
-//    private TimingConfig timingConfig;
+    @ManyToOne
+    private TimingConfig timingConfig;
 
     public long getId() {
         return id;
@@ -50,11 +50,11 @@ public class Timing {
         this.duration = duration;
     }
 
-//    public TimingConfig getTimingConfig() {
-//        return timingConfig;
-//    }
+    public TimingConfig getTimingConfig() {
+        return timingConfig;
+    }
 
-//    public void setTimingConfig(TimingConfig timingConfig) {
-//        this.timingConfig = timingConfig;
-//    }
+    public void setTimingConfig(TimingConfig timingConfig) {
+        this.timingConfig = timingConfig;
+    }
 }

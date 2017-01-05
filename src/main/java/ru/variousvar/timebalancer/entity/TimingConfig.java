@@ -3,8 +3,8 @@ package ru.variousvar.timebalancer.entity;
 import javax.persistence.*;
 import java.util.Set;
 
-//@Entity
-//@Table(name = "timing_configs")
+@Entity
+@Table(name = "timing_configs")
 public class TimingConfig {
     @Id
     @GeneratedValue
@@ -12,9 +12,10 @@ public class TimingConfig {
     private String name;
     private String description;
 
-    @OneToMany
+    @ManyToOne
     private Profile profile;
 
+    @OneToMany(mappedBy = "timingConfig", cascade = CascadeType.ALL)
     private Set<Timing> timings;
 
     public long getId() {
