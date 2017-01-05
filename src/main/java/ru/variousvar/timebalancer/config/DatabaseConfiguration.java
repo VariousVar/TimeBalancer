@@ -30,6 +30,12 @@ public class DatabaseConfiguration  {
     @Value("${db.url}")
     private String dbUrl;
 
+    @Value("${db.username}")
+    private String user;
+
+    @Value("${db.password}")
+    private String password;
+
     @Value("${classpath:db/migrations}")
     private Resource migrationsPath;
 
@@ -39,6 +45,8 @@ public class DatabaseConfiguration  {
 
         dataSource.setDriverClassName("com.mysql.jdbc.Driver");
         dataSource.setUrl(dbUrl);
+        dataSource.setUsername(user);
+        dataSource.setPassword(password);
 
         return dataSource;
     }
