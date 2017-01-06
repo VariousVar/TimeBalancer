@@ -1,21 +1,11 @@
 package ru.variousvar.timebalancer.config;
 
-import org.flywaydb.core.Flyway;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.DependsOn;
-import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
-import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseBuilder;
-import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseType;
-import org.springframework.jdbc.datasource.init.DataSourceInitializer;
-import org.springframework.jdbc.datasource.init.DatabasePopulator;
-import org.springframework.jdbc.datasource.init.DatabasePopulatorUtils;
-import org.springframework.jdbc.datasource.init.ResourceDatabasePopulator;
-import org.springframework.orm.jdo.LocalPersistenceManagerFactoryBean;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
@@ -35,9 +25,6 @@ public class DatabaseConfiguration  {
 
     @Value("${db.password}")
     private String password;
-
-    @Value("${classpath:db/migrations}")
-    private Resource migrationsPath;
 
     @Bean
     public DataSource dataSource() throws Exception {
@@ -72,21 +59,8 @@ public class DatabaseConfiguration  {
         additionalProperties.put(
                 "hibernate.show_sql",
                 true);
-//        additionalProperties.put(
-//                "hibernate.hbm2ddl.auto",
-//                "update");
         entityManagerFactory.setJpaProperties(additionalProperties);
 
         return entityManagerFactory;
     }
-
-//    @Bean
-//    public Flyway flyway() throws Exception {
-//        Flyway flyway = new Flyway();
-//        flyway.setBaselineOnMigrate(true);
-//        flyway.setDataSource(dataSource());
-//        flyway.setLocations("classpath:" + migrationsPath.getFile().getAbsolutePath());
-//
-//        return flyway;
-//    }
 }
