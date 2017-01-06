@@ -1,13 +1,13 @@
 package ru.variousvar.timebalancer.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import ru.variousvar.timebalancer.entity.Profile;
-import ru.variousvar.timebalancer.repository.ProfileRepository;
+import ru.variousvar.timebalancer.service.ProfileService;
 
 import java.util.List;
 
@@ -16,10 +16,15 @@ import java.util.List;
 public class ProfileController {
 
     @Autowired
-    private ProfileRepository profileRepository;
+    private ProfileService profileService;
 
     @GetMapping
-    public ResponseEntity<List<Profile>> getAll() {
-        return new ResponseEntity<>(profileRepository.findAll(), HttpStatus.OK);
+    public ResponseEntity<Page<Profile>> getAll(Pageable pageable) {
+        return new ResponseEntity<>(profileService.findAll(pageable), HttpStatus.OK);
+    }
+
+    @PostMapping
+    public ResponseEntity<Profile> create(@RequestBody Profile profile) {
+        return new ResponseEntity<>(profileService.create(profile), HttpStatus.OK);
     }
 }
