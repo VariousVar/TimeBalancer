@@ -8,14 +8,17 @@ import java.time.Instant;
 public class TimeMark {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Timing timing;
 
     private Instant mark;
 
     private String description;
 
-    private Boolean stopMark;
+    private Boolean start;
 
     public long getId() {
         return id;
@@ -23,6 +26,14 @@ public class TimeMark {
 
     public void setId(long id) {
         this.id = id;
+    }
+
+    public Timing getTiming() {
+        return timing;
+    }
+
+    public void setTiming(Timing timing) {
+        this.timing = timing;
     }
 
     public Instant getMark() {
@@ -41,11 +52,11 @@ public class TimeMark {
         this.description = description;
     }
 
-    public Boolean getStopMark() {
-        return stopMark;
+    public Boolean getStart() {
+        return start;
     }
 
-    public void setStopMark(Boolean stopMark) {
-        this.stopMark = stopMark;
+    public void setStart(Boolean start) {
+        this.start = start;
     }
 }

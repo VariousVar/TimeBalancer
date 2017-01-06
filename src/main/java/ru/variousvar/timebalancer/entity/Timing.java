@@ -11,11 +11,16 @@ public class Timing {
     @Id
     @GeneratedValue
     private long id;
+
     private String name;
+
+    @Enumerated(EnumType.STRING)
     private ChronoUnit unit;
-    private Duration duration;
+
+    private long duration;
 
     @ManyToOne
+    @JoinColumn(name = "timing_config_id")
     private TimingConfig timingConfig;
 
     public long getId() {
@@ -42,11 +47,11 @@ public class Timing {
         this.unit = unit;
     }
 
-    public Duration getDuration() {
+    public long getDuration() {
         return duration;
     }
 
-    public void setDuration(Duration duration) {
+    public void setDuration(long duration) {
         this.duration = duration;
     }
 
