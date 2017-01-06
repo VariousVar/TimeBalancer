@@ -3,7 +3,7 @@ USE tb;
 CREATE TABLE profiles
 (
   id BIGINT PRIMARY KEY AUTO_INCREMENT,
-  name VARCHAR(255) DEFAULT '',
+  name VARCHAR(255) DEFAULT '' NOT NULL,
   description VARCHAR(255) DEFAULT ''
 );
 
@@ -36,7 +36,7 @@ CREATE TABLE time_mark
   timing_id BIGINT NOT NULL,
   mark DATETIME NOT NULL,
   description TEXT,
-  stopMark BIT NOT NULL,
+  start BIT NOT NULL,
 
   PRIMARY KEY (id, timing_id, mark)
 )
