@@ -53,12 +53,9 @@ public class DatabaseConfiguration  {
 
         // Hibernate properties
         Properties additionalProperties = new Properties();
-        additionalProperties.put(
-                "hibernate.dialect",
-                "org.hibernate.dialect.MySQL5InnoDBDialect");
-        additionalProperties.put(
-                "hibernate.show_sql",
-                true);
+        additionalProperties.put("hibernate.dialect", "org.hibernate.dialect.MySQL5InnoDBDialect");
+        additionalProperties.put("hibernate.show_sql", true);
+        additionalProperties.put("hibernate.id.new_generator_mappings", false);
         entityManagerFactory.setJpaProperties(additionalProperties);
 
         return entityManagerFactory;
