@@ -14,4 +14,10 @@ public interface TimeMarkRepository extends JpaRepository<TimeMark, Long> {
 
     @Query("select t from TimeMark t where t.timing.id = :timingId and t.mark between :fromDate and :toDate")
     List<TimeMark> findMarks(@Param("fromDate") Instant fromDate, @Param("toDate") Instant toDate, @Param("timingId") Long timingId);
+
+    void openPeriod(Instant date, long timingId);
+
+    void closePeriod(Instant date, long timingId);
+
+    void pushPeriod(Instant fromDate, Instant toDate, long timingId);
 }
