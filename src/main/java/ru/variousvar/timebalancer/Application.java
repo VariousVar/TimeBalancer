@@ -10,7 +10,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import java.io.IOException;
 
 @SpringBootApplication
-//@EnableJpaRepositories
+@EnableJpaRepositories
 @PropertySource("classpath:application.properties")
 public class Application {
     public static void main(String[] args) throws IOException {

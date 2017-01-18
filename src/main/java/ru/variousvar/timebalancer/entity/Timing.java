@@ -1,7 +1,6 @@
 package ru.variousvar.timebalancer.entity;
 
 import javax.persistence.*;
-import java.time.Duration;
 import java.time.temporal.ChronoUnit;
 
 @Entity
@@ -20,8 +19,8 @@ public class Timing {
     private long duration;
 
     @ManyToOne
-    @JoinColumn(name = "timing_config_id")
-    private TimingConfig timingConfig;
+    @JoinColumn(name = "profile_id")
+    private Profile profile;
 
     public long getId() {
         return id;
@@ -55,11 +54,11 @@ public class Timing {
         this.duration = duration;
     }
 
-    public TimingConfig getTimingConfig() {
-        return timingConfig;
+    public Profile getProfile() {
+        return profile;
     }
 
-    public void setTimingConfig(TimingConfig timingConfig) {
-        this.timingConfig = timingConfig;
+    public void setProfile(Profile profile) {
+        this.profile = profile;
     }
 }
