@@ -11,7 +11,7 @@ public class TimeMark {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     private Timing timing;
 
     private Instant mark;
