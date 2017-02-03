@@ -5,22 +5,18 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ru.variousvar.timebalancer.entity.TimeMark;
-import ru.variousvar.timebalancer.repository.TimeMarkRepository;
-
-import java.time.Instant;
+import ru.variousvar.timebalancer.service.MarkService;
 
 @RestController
 @RequestMapping("/marks")
 public class MarkController {
 
     @Autowired
-    private TimeMarkRepository timeMarkRepository;
+    private MarkService markService;
 
-    @PostMapping("/check")
+    @PostMapping("/now")
     public ResponseEntity newMarkFromNow(@RequestBody TimeMark timeMark) {
-        timeMark.setMark(Instant.now());
-
-        timeMarkRepository.save(timeMark);
+        markService.createTimeMarkNow(timeMark.getTiming());
 
         return new ResponseEntity(HttpStatus.OK);
     }
