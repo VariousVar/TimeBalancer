@@ -10,6 +10,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
+import java.util.List;
 
 @Component
 public class TimeMarkRepositoryImpl implements TimeMarkCustomRepository {
@@ -23,6 +24,9 @@ public class TimeMarkRepositoryImpl implements TimeMarkCustomRepository {
         CriteriaQuery<TimeMark> query = cb.createQuery(TimeMark.class);
         Root<TimeMark> entity = query.from(TimeMark.class);
         query.select(entity).where(cb.equal(entity.get("timing").get("id"), timingId)).orderBy(cb.desc(entity.get("mark")));
-        return entityManager.createQuery(query).setMaxResults(1).getSingleResult();
+
+        List<TimeMark> marks = entityManager.createQuery(query).setMaxResults(1).getResultList();
+
+        return marks.isEmpty() ? null : marks.get(0);
     }
 }
