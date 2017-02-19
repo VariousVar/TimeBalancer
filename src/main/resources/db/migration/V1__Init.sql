@@ -27,5 +27,8 @@ CREATE TABLE time_mark
   description TEXT,
   start BIT NOT NULL,
 
-  PRIMARY KEY (id, timing_id, mark)
+  PRIMARY KEY (id, timing_id, mark),
+  FOREIGN KEY time_mark_timing_fk (timing_id) REFERENCES timings (id)
+    ON UPDATE CASCADE
+    ON DELETE CASCADE
 )
