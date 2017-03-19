@@ -21,8 +21,16 @@ public class TimeMarkCreation {
         timings.add(timing.getId());
     }
 
-    @After(value = "execution (* ru.variousvar.timebalancer.service.MarkService.createTimeMark*(ru.variousvar.timebalancer.entity.Timing, ..)) && args(timing, ..))")
+    @AfterReturning(value = "execution (* ru.variousvar.timebalancer.service.MarkService.createTimeMark*(ru.variousvar.timebalancer.entity.Timing, ..)) && args(timing, ..))")
     public void unlockTiming(Timing timing) {
         timings.remove(timing.getId());
+    }
+
+    @AfterThrowing(value = "execution (* ru.variousvar.timebalancer.service.MarkService.createTimeMark*(ru.variousvar.timebalancer.entity.Timing, ..)) && args(timing, ..))",
+            throwing = "ex")
+    public void unlockTimingAfterSomeException(Timing timing, Exception ex) {
+        if (!(ex instanceof ConcurrentMarkInsertion)) {
+            timings.remove(timing.getId());
+        }
     }
 }

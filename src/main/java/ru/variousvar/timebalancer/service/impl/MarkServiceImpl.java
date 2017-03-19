@@ -11,23 +11,26 @@ import ru.variousvar.timebalancer.service.MarkService;
 import java.time.Instant;
 
 @Service
-@Transactional
+@Transactional(transactionManager = "transactionManager")
 public class MarkServiceImpl implements MarkService {
 
     @Autowired
     private TimeMarkRepository markRepository;
 
     @Override
+    @Transactional(transactionManager = "transactionManager")
     public TimeMark getLast(Timing timing) {
         return markRepository.findLast(timing.getId());
     }
 
     @Override
+    @Transactional(transactionManager = "transactionManager")
     public void createTimeMarkNow(Timing timing) {
         createTimeMarkFromDate(timing, Instant.now());
     }
 
     @Override
+    @Transactional(transactionManager = "transactionManager")
     public void createTimeMarkFromDate(Timing timing, Instant date) {
         TimeMark last = getLast(timing);
 

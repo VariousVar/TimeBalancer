@@ -1,15 +1,18 @@
 package ru.variousvar.timebalancer.exception;
 
-public class ConcurrentMarkInsertion extends RuntimeException {
-    private String message;
+import ru.variousvar.timebalancer.MarkCreationStatus;
+
+/**
+ * Throws if someone trying to create a new mark concurrently with other on a same timing.
+ */
+public class ConcurrentMarkInsertion extends CommonMarkException {
 
     public ConcurrentMarkInsertion(String message) {
-        super(message);
-        this.message = message;
+        this(message, MarkCreationStatus.UPDATING);
     }
 
-    @Override
-    public String getMessage() {
-        return message;
+    public ConcurrentMarkInsertion(String message, MarkCreationStatus status) {
+        super(message, status);
     }
+
 }
