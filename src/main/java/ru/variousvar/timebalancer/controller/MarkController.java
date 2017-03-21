@@ -20,4 +20,11 @@ public class MarkController {
 
         return new ResponseEntity(HttpStatus.OK);
     }
+
+    @PostMapping("/date")
+    public ResponseEntity newMarkFromDate(@RequestBody TimeMark timeMark) {
+        markService.createTimeMarkFromDate(timeMark.getTiming(), timeMark.getMark());
+
+        return new ResponseEntity(HttpStatus.OK);
+    }
 }
