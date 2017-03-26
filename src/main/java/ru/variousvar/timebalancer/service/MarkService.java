@@ -3,9 +3,14 @@ package ru.variousvar.timebalancer.service;
 import ru.variousvar.timebalancer.entity.TimeMark;
 import ru.variousvar.timebalancer.entity.Timing;
 
+import java.time.Duration;
 import java.time.Instant;
+import java.time.temporal.TemporalUnit;
 
 public interface MarkService {
+
+    Duration countTime(Long timingId, Instant from, Instant to, TemporalUnit unit);
+
     /**
      * Peek last (ordered by date) mark corresponded to timing.
      * @param timing

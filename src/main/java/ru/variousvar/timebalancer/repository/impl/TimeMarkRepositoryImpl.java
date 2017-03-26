@@ -10,6 +10,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
+import java.time.Instant;
 import java.util.List;
 
 @Component
@@ -28,5 +29,23 @@ public class TimeMarkRepositoryImpl implements TimeMarkCustomRepository {
         List<TimeMark> marks = entityManager.createQuery(query).setMaxResults(1).getResultList();
 
         return marks.isEmpty() ? null : marks.get(0);
+    }
+
+    @Override
+    public boolean isOpenedBeforeDate(@Param("timingId") Long timingId, Instant date) {
+        CriteriaBuilder cb = entityManager.getCriteriaBuilder();
+        CriteriaQuery<TimeMark> query = cb.createQuery(TimeMark.class);
+        Root<TimeMark> e = query.from(TimeMark.class);
+        query
+                .select(e)
+                .where(
+                        cb.equal(e.get("timing").get("id"), timingId),
+                        cb.lessThanOrEqualTo(e.get("mark"), date)
+                )
+                .orderBy(cb.desc(e.get("mark")));
+
+        List<TimeMark> marks = entityManager.createQuery(query).setMaxResults(1).getResultList();
+
+        return marks.isEmpty() ? false : marks.get(0).getStart();
     }
 }

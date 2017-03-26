@@ -29,7 +29,8 @@ public interface TimeMarkRepository extends JpaRepository<TimeMark, Long>, TimeM
      * @param toDate period close date
      * @param timingId
      */
-    @Query("insert into TimeMark t (timing.id, mark, start) values (:timingId, :fromDate, true),(:timingId, :toDate, false)")
+//    @Query("insert into TimeMark t (timing.id, mark, start) values (:timingId, :fromDate, true),(:timingId, :toDate, false)")
+    @Query("select t from TimeMark t")
     void pushPeriod(@Param("fromDate") Instant fromDate, @Param("toDate") Instant toDate, @Param("timingId") long timingId);
 
     /**
@@ -40,6 +41,7 @@ public interface TimeMarkRepository extends JpaRepository<TimeMark, Long>, TimeM
      * @param toDate period open date
      * @param timingId
      */
-    @Query("insert into TimeMark t (timing.id, mark, start) values (:timingId, :fromDate, false),(:timingId, :toDate, true)")
+//    @Query("insert into TimeMark t (timing.id, mark, start) values (:timingId, :fromDate, false),(:timingId, :toDate, true)")
+    @Query("select t from TimeMark t")
     void pushInversePeriod(@Param("fromDate") Instant fromDate, @Param("toDate") Instant toDate, @Param("timingId") long timingId);
 }
