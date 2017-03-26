@@ -6,6 +6,7 @@ import ru.variousvar.timebalancer.entity.Timing;
 import java.time.Duration;
 import java.time.Instant;
 import java.time.temporal.TemporalUnit;
+import java.util.List;
 
 public interface MarkService {
 
@@ -17,6 +18,16 @@ public interface MarkService {
      * @return last by date existed time mark.
      */
     TimeMark getLast(Timing timing);
+
+    /**
+     * Get all marks that created between {@code from} and {@code to} for selected timing.
+     *
+     * @param timingId
+     * @param from
+     * @param to
+     * @return
+     */
+    List<TimeMark> getMarks(Long timingId, Instant from, Instant to);
 
     /**
      * Creates new time mark from current time. It closes/opens period due to last timing registered mark.

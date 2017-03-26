@@ -81,6 +81,11 @@ public class MarkServiceImpl implements MarkService {
     }
 
     @Override
+    public List<TimeMark> getMarks(Long timingId, Instant from, Instant to) {
+        return markRepository.findMarks(from, to, timingId);
+    }
+
+    @Override
     @Transactional(transactionManager = "transactionManager")
     public void createTimeMarkNow(Timing timing) {
         createTimeMarkFromDate(timing, Instant.now());

@@ -1,4 +1,4 @@
-package ru.variousvar.timebalancer.controller;
+package ru.variousvar.timebalancer.web.controller;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

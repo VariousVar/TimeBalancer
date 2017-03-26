@@ -1,4 +1,4 @@
-package ru.variousvar.timebalancer.controller;
+package ru.variousvar.timebalancer.web.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;

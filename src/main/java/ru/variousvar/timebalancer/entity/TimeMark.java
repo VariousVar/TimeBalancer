@@ -1,11 +1,16 @@
 package ru.variousvar.timebalancer.entity;
 
+import com.fasterxml.jackson.annotation.JsonView;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+
 import javax.persistence.*;
 import java.time.Instant;
 
 @Entity
 @Table(name = "time_mark")
 public class TimeMark {
+
+    public interface CommonView {}
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -14,10 +19,13 @@ public class TimeMark {
     @ManyToOne(fetch = FetchType.EAGER)
     private Timing timing;
 
+    @JsonView(CommonView.class)
     private Instant mark;
 
+    @JsonView(CommonView.class)
     private String description;
 
+    @JsonView(CommonView.class)
     private Boolean start;
 
     public long getId() {
