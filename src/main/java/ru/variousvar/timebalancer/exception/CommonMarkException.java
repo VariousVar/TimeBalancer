@@ -1,6 +1,6 @@
 package ru.variousvar.timebalancer.exception;
 
-import ru.variousvar.timebalancer.MarkCreationStatus;
+import ru.variousvar.timebalancer.service.MarkCreationStatus;
 
 public class CommonMarkException extends RuntimeException {
     private String message;

@@ -3,7 +3,7 @@ package ru.variousvar.timebalancer.service.impl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import ru.variousvar.timebalancer.MarkCreationStatus;
+import ru.variousvar.timebalancer.service.MarkCreationStatus;
 import ru.variousvar.timebalancer.entity.TimeMark;
 import ru.variousvar.timebalancer.entity.Timing;
 import ru.variousvar.timebalancer.exception.InvalidMarkException;

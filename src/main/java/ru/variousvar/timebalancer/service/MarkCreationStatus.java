@@ -1,4 +1,4 @@
-package ru.variousvar.timebalancer;
+package ru.variousvar.timebalancer.service;
 
 public enum MarkCreationStatus {
     OK,

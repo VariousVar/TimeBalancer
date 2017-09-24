@@ -1,6 +1,6 @@
 package ru.variousvar.timebalancer.exception;
 
-import ru.variousvar.timebalancer.MarkCreationStatus;
+import ru.variousvar.timebalancer.service.MarkCreationStatus;
 import ru.variousvar.timebalancer.validation.ValidityResult;
 
 import java.util.ArrayList;

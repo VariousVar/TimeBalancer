@@ -1,6 +1,6 @@
 package ru.variousvar.timebalancer.exception;
 
-import ru.variousvar.timebalancer.MarkCreationStatus;
+import ru.variousvar.timebalancer.service.MarkCreationStatus;
 
 /**
  * Throws if someone trying to create a new mark concurrently with other on a same timing.
